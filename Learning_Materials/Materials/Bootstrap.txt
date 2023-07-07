@@ -1,0 +1,78 @@
+Colors:
+primary
+secondary
+success
+danger
+warning
+info
+
+Applying Colors:
+text-primary
+bg-primary
+border border-primary
+btn btn-primary
+
+Position:
+position-static
+position-relative
+position-absolute
+position-fixed
+position-sticky
+
+Padding:
+p-3, py-3, px-3, pt-3.
+Margin:
+m-3, my-3, mx-3, mt-3.
+
+Visibility:
+visible & invisible
+
+Radius:
+rounded-circle, top, pill, 0
+
+Text:
+text-left, text-wrap, text-nowrap, text-lowercase,text-capitalize,
+text-decoration-none, font-weight-bold[normal|light|italic]
+
+
+Alignment:
+align-baseline, align-middle, mx-auto.
+
+Card:
+card >> card-body >> card-subtitle >> card-title >> card-text >> card-link
+
+Sizing:
+w-25, h-25 [25% of h/w]
+
+Selection:
+user-select-all, user-select-auto, user-select-none
+
+Nav Bar:
+nav >> nav-item >> nav-link
+[(justify-content-center|justify-content-end | flex-column) || (nav-pills | nav-tabs | nav-fill)]
+
+FontAwesome: [for icons]:
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<p>Raghunadh <i class='fas fa-feather-alt' style='font-size:28px;color:red'></i></i></p>
+
+Form Controls:
+form-group(div) >> form-control(input)
+form-select(select)
+form-check(div) form-switch >> form-check-input(input radio/checkbox) & form-check-label(label)
+form-range(input range)
+input-group(div) >> form-control(input) & input-group-text(span)
+form-floating(div) >> form-control(input)
+
+Flex: It means one after one could be horizontal or vertical.
+"d-flex flex-row": horizontally from left
+"d-flex flex-row-reverse": horizontally from right
+"d-flex flex-column": vertically from left
+"d-flex flex-column-reverse": vertically from right
+"d-flex justify-content-start": Justify from left
+
+
+<nav .navbar navbar-expand-md navbar-dark bg-dark
+a.navbar-brand
+button.navbar-toggler data-bs-toggle='collapse' data-bs-target='#navitems'<span.navbar-toggler-icon
+div.navbar#navitems
+div.nav>>nav-item>>nav-link

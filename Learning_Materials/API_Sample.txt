@@ -1,0 +1,99 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+using punnamsFamily.Models;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace punnamsFamily.Controllers
+{
+    public class punnamAPIController : ApiController
+    {
+        punnamEntities DB = new punnamEntities();
+
+        public IHttpActionResult Get()
+        {
+            return Ok(DB.punnams.ToList());
+        }
+
+        public IHttpActionResult Get(int id)
+        {
+            punnam P = DB.punnams.Find(id);
+            return Ok(P);
+        }
+
+        public IHttpActionResult Put(int id, punnam d)
+        {
+            punnam P = DB.punnams.Find(id);
+            P.name = d.name;
+            P.sunof = d.sunof;
+            DB.Entry(P).State = System.Data.Entity.EntityState.Modified;
+            DB.SaveChanges();
+            return Ok(DB.punnams.ToList());
+        }
+
+        public IHttpActionResult Delete(int id)
+        {
+            punnam P = DB.punnams.Find(id);
+            DB.punnams.Remove(P);
+            DB.SaveChanges();
+            return Ok(DB.punnams.ToList());
+        }
+
+        public IHttpActionResult Post(punnam P)
+        {
+            DB.punnams.Add(P);
+            DB.SaveChanges();
+            return Ok(DB.punnams.ToList());
+        }
+    }
+}
+===================================================================================================================
+API From Postman:
+----------------
+
+
+API Documentation:
+------------------
+
+Get:
+---
+http://localhost:64306/api/empapi
+
+
+Get(id):
+-------
+http://localhost:64306/api/empapi/101
+
+Delete(id):
+----------
+http://localhost:64306/api/empapi/102
+
+Put(id, Obj):
+-----------
+Giving ID & Body as params to API.
+http://localhost:64306/api/empapi/101
+>>	Body:
+	----
+{
+    "ID": 101,
+    "NAME": "RAGHUNADH",
+    "TECHNOLOGY": ".NET",
+    "LOCATION": "HYD",
+}
+
+Post(Obj):
+---------
+Giving obj as params to API.
+http://localhost:64306/api/empapi
+>>	Body:
+	----
+{
+    "ID": 102,
+    "NAME": "SHANKAR",
+    "TECHNOLOGY": ".NET",
+    "LOCATION": "HYD",
+}

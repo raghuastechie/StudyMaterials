@@ -1,0 +1,243 @@
+string; number;
+float; 
+date;
+time;
+uuid; 
+boolean; 
+null;
+json;
+auto str+int;
+
+
+Float:
+supports decimal values.
+
+Decimal & Numeric:
+decimal(5, 2) || decimal(10, 0) || numeric(5, 2)
+	>> "5" means allows 5 digits except ".". 
+	>> "2" means allows 2 decimal values.
+[allows >> Total 5 digits, 2 decimals, (5-2) 3 non-decimal].
+
+Date:
+select GETDATE() >> generate date&time(YYYY-MM-DD HH:MM:SS.MS)
+select CONVERT(time, GETDATE()) as hourminutesecond >> time only
+select CONVERT(date,GETDATE()) as dateonly >> date only
+select FORMAT(GETDATE(),'dd-MM-yyyy')
+select FORMAT(GETDATE(),'hh:mm') >> 02:45
+select FORMAT(GETDATE(),'HH:mm') >> 14:45
+
+SELECT FORMAT(GETDATE(), 'yyyy/MM/dd')
+SELECT FORMAT(GETDATE(), 'yyyy/MMM/dd')
+SELECT FORMAT(GETDATE(), 'yyyy/MMMM/dd')
+SELECT FORMAT(GETDATE(), 'yyyy/MMMM/ddd')
+SELECT FORMAT(GETDATE(), 'yyyy/MMMM/dddd')
+------------------------------------------------------------------------------------------------------------
+using System.Data.SqlClient;
+
+    string conString = @"Data Source=LAPTOP-6INCS13L; 
+			Initial Catalog=SamplePractice; 
+			Integrated Security=yes;";
+    SqlConnection con = new SqlConnection(conString);
+    con.Open();
+    string qry = "select Woodname from Allwoods";
+    SqlCommand cmd = new SqlCommand(qry, con);
+    SqlDataReader rdr = cmd.ExecuteReader();
+    while (rdr.Read())
+    {
+        Console.WriteLine(rdr["woodname"].ToString());
+    }
+    con.Close();
+------------------------------------------------------------------------------------------------------------
+    string conString = @"Data Source=LAPTOP-6INCS13L; 
+			Initial Catalog=SamplePractice; 
+			Integrated Security=yes;";
+    SqlConnection con = new SqlConnection(conString);
+    con.Open();
+    string qry = "insert into Allwoods values('Bengali', 'bengwood');";
+    SqlCommand cmd = new SqlCommand(qry, con);
+    cmd.ExecuteNonQuery();
+
+    string qryy = "select * from Allwoods";
+    SqlCommand cmdd = new SqlCommand(qryy, con);
+    SqlDataReader rdr = cmdd.ExecuteReader();
+    while (rdr.Read())
+    {
+        Console.WriteLine(rdr["woodname"].ToString());
+    }
+    con.Close();
+------------------------------------------------------------------------------------------------------------
+    string conString = @"Data Source=LAPTOP-6INCS13L; 
+			Initial Catalog=SamplePractice; 
+			Integrated Security=yes;";
+    SqlConnection con = new SqlConnection(conString);
+    con.Open();
+    SqlDataAdapter adp = new SqlDataAdapter("sp_table", con);
+    DataSet dt = new DataSet();
+    adp.Fill(dt);
+    for (int i = 0; i < dt.Tables[0].Rows.Count; i++)
+    {
+        Console.WriteLine(dt.Tables[0].Rows[i][1].ToString());
+    }            
+    con.Close();
+------------------------------------
+	Create Procedure sp_table
+	As Begin
+	Select * from Allwoods
+	End
+	Exec sp_table
+	Drop Procedure sp_table
+------------------------------------------------------------------------------------------------------------
+DataAdapter 	>> 	DataSet
+DataReader	>> 	ExecuteReader
+ExecuteNonQuery
+
+SP_NonParams & SP_Params
+------------------------------------
+DB >> Programmability >> StoreProcedure
+
+------------------------------------
+Points:
+
+Count(*) 	>> generates total rows in the table.
+sp_help sp_name >> generates params, types etc props.
+Null 		>> can be nullable
+NotNull 	>> can compulsory field
+
+
+------------------------------------------------------------------------
+CREATE TABLE EMP(
+	ID INT IDENTITY(101,1) PRIMARY KEY,
+	NAME VARCHAR(50),
+	EXP INT,
+	TECHNOLOGY VARCHAR(30), 
+	DOB DATE,
+	DOJ DATE,
+	LOCATION VARCHAR(30),
+	BASIC INT,
+	PF DECIMAL(8,3))
+
+INSERT INTO EMP VALUES ('RAGHUNADH', 9.2, '.NET', '1984-01-22', '2019-08-05', 'HYDERABAD', 27155,271.55)
+------------------------------------------------------------------------
+				T-SQL:
+========================================================================
+
+Declaring, Assigning, Printing, While Loop & IF Condition:
+----------------------------------------------------------
+BEGIN
+  Declare @id int = 1; Declare @name varchar(30); Declare @location varchar(30);
+  While @id <= 5
+  Begin
+    SELECT @name = NAME, @location = LOCATION FROM NMES WHERE ID = @id;
+    If @location = 'HYD' set @location = 'HYDERABAD';
+    print @name + ' Lives In ' + @location;
+    set @id = @id + 1;
+  End
+END
+________________________________________________________
+
+Cursor & Fetch:
+---------------
+BEGIN
+Declare @name varchar(30); Declare @location varchar(30);
+Declare cur cursor for SELECT NAME, LOCATION FROM NMES;
+Open cur;
+FETCH NEXT FROM cur into @name, @location;
+While @@FETCH_STATUS = 0
+	Begin
+	If @location = 'HYD' set @location = 'HYDERABAD';
+	If @location = 'VZK' set @location = 'Vizag';
+	print @name + ' Lives In ' + @location
+	FETCH NEXT FROM cur INTO @name, @location
+	End
+Close cur;
+Deallocate Cur;
+END
+________________________________________________________
+
+VIEWS:
+------
+** Read Views:
+	Select * from TEMPVIEW
+** Create View:
+	Create View TEMPVIEW as select * from USERS where name like 'R%'
+** Drop Views:
+	Drop view Tempview
+** Update View:
+
+
+CTE:
+----
+**Create & Read CTE:
+	with tempcte as (select * from USERS) select * from tempcte
+** Drop CTE:
+	
+STORE PROCEDURE:
+---------------
+**CREATE PROC:
+	Create Procedure tempProc as Select * from USERS
+**READ PROC:
+	Exec tempProc
+**DROP PROC
+	Drop procedure tempProc
+
+*Triggers:
+--------
+Create Trigger inCheck on USERS for insert as
+Begin
+	Declare @Age int;
+	Select @Age = Age from inserted;
+	if(@Age < 18)
+	Begin
+		print 'Candidate Age Must Be More Than 18 Years';
+		rollback;
+	End
+End
+Insert into USERS values('ABC', 17, 'Hyderabad')
+drop trigger inCheck
+
+x-x-x-x-x-x-x-x
+
+Create Trigger DelCheck on USERS for delete As
+Begin
+	Declare @Age int;
+	select @Age = Age from deleted;
+	if(@Age >= 18) 
+	Begin
+		rollback;
+		print 'Can not Delete cause He is Major'
+	End
+End
+Delete USERS where Name = 'raghunadh'
+drop trigger DelCheck
+
+x-x-x-x-x-x-x-x
+
+Conversion Of DataTypes:
+========================
+	CAST(@Number as varchar(10))
+
+	CONVERT(varchar(10),@Number)
+
+	set @tp = CAST(@score as varchar(20));
+
+
+
+
+
+Commands;
+DataTypes
+Constraints;
+Normalization;
+Operators;
+Case Statements;
+Import SQL Clause;
+Joins;
+
+* bit is equalent for boolean data type;
+* NewID() will generate uuid in sql;
+
+Create table dbo.images (id int null,
+img varbinary(max) null);
+
+insert into db.images values (1,
+(select * from Openrowset (BULK 'c:\sql\images\sql.png', Single_Blob)as T))

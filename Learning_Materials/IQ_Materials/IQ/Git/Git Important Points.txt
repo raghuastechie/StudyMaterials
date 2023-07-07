@@ -1,0 +1,26 @@
+can we clone from branch ?
+what sshs and how apply credentials ?
+centralized vs distributed vcs ?
+remove, fetch, undo, revert, reset (hard/soft), conflicts etc.,
+config, log, diff, ignore, stash, vi, :wq etc.,
+*****************************************************************
+git diff --staged >> show the difference between staged and commit area.
+git diff >> show the difference between working and staged area.
+
+git add -f >> fourcefull adding to staging area.
+.gitignore >> create .gitignore file and mention the files to ignore on push.
+
+git log >> to show all commits including all information (id 40length).
+git log --oneline >>to show all commits in brief (id 7 length).
+git log --stat >> show all stats including for every commit what changes made.
+git log --patch >> including file location.
+git log --graph >> show graphical (git log --graph --oneline)
+git log -2 >> only top 2 commits.
+git log --after '20-04-20' >> filtering the commits
+git log --before '20-04-20' >> filtering the commits
+git log --author 'raghuastechie'
+git log --grep 'mesage' >> based on commit message.
+
+
+
+

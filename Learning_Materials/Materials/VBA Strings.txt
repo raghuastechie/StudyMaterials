@@ -1,0 +1,199 @@
+Y:\Projects\Healthcare\PHARMA\Clinical Trials\Team\Sourcing\Dashboard\2015 Trackers
+
+Intialization: -
+
+Set ie = CreateObject("InternetExplorer.application")
+ie.Visible = True
+ie.navigate ""
+While ie.readystate <> 4 Or ie.busy: DoEvents: Wend
+
+For Each ele In ie.document.getElementsByTagName("a")
+
+
+Next ele
+
+kpeddi@teksystems.com
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Option Selection in drop down list:-
+
+For Each obj In IE.Document.All.Item("csSB_Search_State").Options
+If obj.innerText = myState Then
+obj.Selected = True
+End If
+Next obj
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Button Click:-
+
+For Each ele In ie.document.getElementsByTagName("button")
+If ele.innertext = "Next" Then
+ele.Click
+Exit For
+End If
+Next ele
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Hold the Ie until it's loading:-
+For Each ele In ie.document.getElementsByTagName("a")
+
+Next ele
+While ie.readystate <> 4 Or ie.busy: DoEvents: Wend
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+For Each obj In ie.Document.getElementsBytagname("input")
+MsgBox obj.Value
+If obj.Value = 0 Then
+obj.Click
+End If
+Exit For
+Next obj
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+On Error Resume Next
+Columns("E:E").Select
+    Selection.Find(What:=sid, After:=ActiveCell, LookIn:=xlFormulas, _
+        LookAt:=xlPart, SearchOrder:=xlByRows, SearchDirection:=xlNext, _
+        MatchCase:=False, SearchFormat:=False).Activate
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+ie.document.getelementsbyname("ctl00$ContentPlaceHolder1$btnSearchDate").Item.Click
+ie.document.getelementsbyname("ctl00$ContentPlaceHolder1$txtProdSearch").Item.innertext = "Raghu"
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+ FileCopy "Y:\KPProjects\Healthcare\Clinical Trial Database\Sourcing\Circulation\Distribution Sheets\Circulation_Profiling.xlsm", "Y:\KPProjects\Healthcare\Clinical Trial Database\Team Folder\raghunadhp\Back_Up\Circulation_Profiling.xlsm"
+ FileCopy "Y:\KPProjects\Healthcare\Clinical Trial Database\Sourcing\Circulation\Distribution Sheets\IDs for profiling.xlsx", "Y:\KPProjects\Healthcare\Clinical Trial Database\Team Folder\raghunadhp\Back_Up\IDs for profiling.xlsx"
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Code execution has been interrupted:-
+Application.EnableCancelKey = xlDisabled
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Wait while scrapping the web:-
+Application.Wait (Now + TimeValue("00:00:03"))
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Find Function: -
+On Error Resume Next
+    Columns("B:B").Select
+    Selection.Find(What:=Creteria).Select
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Run Macro From Another: -
+
+Application.Run "raghu.xlsm!ThisWorkbook.Called"
+Application.Run "Test_Macro.xlsm!Test"
+
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Date Format: -
+
+Format(#17/04/2004#, "Short Date")
+Format(#17/04/2004#, "Long Date")
+Format(#17/04/2004#, "yyyy/mm/dd")
+
+Names: -
+
+MonthName(3)
+Result: 'March'
+
+Week:
+weekdayname(weekday(date-1))
+
+DAY(A1)
+Result: 1
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Hyper Links: 
+For Each HL In Sheets("data").Range("A:A").Hyperlinks
+HL.Range.Offset(0, 1).Value = HL.Address
+Next
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Password:-
+    Workbooks(l).Sheets("").Unprotect Password = "QC"
+    Workbooks(l).Sheets("").Unprotect Password = "Super QC"
+    Workbooks(l).Sheets("").Unprotect Password = "Super QC"
+    Workbooks(l).Sheets("").Protect Password = "QC"
+    Workbooks(l).Sheets("").Protect Password = "Super QC"
+    Workbooks(l).Sheets("").Protect Password = "Error_Tracker"
+
+    ActiveWindow.DisplayHeadings = False
+    ActiveWindow.DisplayHorizontalScrollBar = False
+    ActiveWindow.DisplayWorkbookTabs = False
+
+
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+Boarders: -
+Range("A1").CurrentRegion.Borders.LineStyle = xlContinuous
+Range("A1").CurrentRegion.Borders.Weight = xlHairline
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   For t = 0 To (Tbl.Length - 1)
+        For r = 0 To (Tbl(t).Rows.Length - 1)
+            If r = 0 Then GoTo Nxr
+            q = ThisWorkbook.Sheets("Sheet1").Range("A" & Rows.Count).End(xlUp).Row + 1
+            For c = 0 To (Tbl(t).Rows(r).Cells.Length - 1)
+                If Tbl(t).Rows(r).Cells.Length <> 6 Then GoTo Nxt
+                k = c + 1
+                ThisWorkbook.Worksheets(1).Cells(q, k) = Tbl(t).Rows(r).Cells(c).innertext
+            Next c
+                k = 0
+Nxr:
+        Next r
+Nxt:
+   Next t
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Dim OutApp As Object, OutMail As Object
+    Set OutApp = CreateObject("Outlook.Application")
+    Set OutMail = OutApp.CreateItem(0)
+    With OutMail
+.To = "raghu_9993@yahoo.com;raghunadhpstays@gmail.com"
+      '.CC = "raghu_9993@yahoo.com;raghunadhpstays@gmail.com"
+      '.BCC = "raghu_9993@yahoo.com;raghunadhpstays@gmail.com"
+      .Subject = "SUBJECT"
+      .Body = "BODY"
+      '.Attachments.Add "Path\XXX.xlsx"
+      .Send
+    End With
+    'Kill "Path\XXX.xlsx"
+    'On Error GoTo 0
+    Set OutMail = Nothing
+    Set OutApp = Nothing
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    Application.DisplayFormulaBar = True
+    ActiveWindow.DisplayHeadings = True
+    ActiveWindow.DisplayGridlines = True
+    With ActiveWindow
+        .DisplayHorizontalScrollBar = True
+        .DisplayVerticalScrollBar = True
+        .DisplayWorkbookTabs = True
+    End With
+    Application.DisplayFullScreen = True
+    Application.DisplayFullScreen = False
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+=SUM(IF(FREQUENCY(A2:A10,A2:A10)>0,1)) 
+=SUM(IF(FREQUENCY(MATCH(B2:B10,B2:B10,0),MATCH(B2:B10,B2:B10,0))>0,1)) 
+=SUM(IF(FREQUENCY(IF(LEN(A2:A10)>0,MATCH(A2:A10,A2:A10,0),""), IF(LEN(A2:A10)>0,MATCH(A2:A10,A2:A10,0),""))>0,1)) 
+https://support.office.com/en-us/article/Count-unique-values-among-duplicates-7889942d-824e-4469-893c-191d1efde950
+
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+ActiveSheet.Range("$A$1:$H$5").AutoFilter Field:=2, Criteria1:=Criteria
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+ie.Document.getelementsbyname("displayOptions").Item.FireEvent "onchange"
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''

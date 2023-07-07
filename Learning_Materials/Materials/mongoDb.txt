@@ -1,0 +1,113 @@
+CORS;
+Authentication & Authorization;
+Http Status Codes;
+Cookies - Local & Session Storages;
+Oops Concept;
+Query String & Req.params;
+Forms validation & submissions;
+Html Validations;
+3tier & n tier architecture;
+Date Operations;
+Data Parsing Operations;
+
+
+crud with DB; Schema-Constraints; operators;
+------------------------------------------------------------
+const mongoose = require('mongoose');
+User.find({}, (err, users) => if...});
+User.find1&Update({e:u.e}, {e:u.e, p:u.p}, (er) => {if...});
+User.save((er, user) => {if...});
+User.find1&delete({e:u.e}, (er,user) => {if...});
+User.find1({e:u.e},(er, user) => {if...});
+------------------------------------------------------------
+const db = 'mongodb://localhost:27017/sampleDB';
+mongoose.connect(db, err => {
+     if(err) {console.error('Error!' + err)} 
+	else {console.log('Connected to mongoDB')}
+});
+mongoose.connect(db)
+	.then(() => console.log('Connected'))
+	.catch(err => console.log('Not Connected'));
+------------------------------------------------------------
+const Schema = mongoose.Schema;
+let colegueSchema = new Schema({
+    name: String, organisation: String, location: String });
+module.exports = mongoose.model('colegue', colegueSchema);
+------------------------------------------------------------
+const userSchema = new Schema({
+    name: String,
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+	   min:(3)
+    },
+    emailAddress: [String], >> key value pair
+    gender: {
+        type: String,
+        enum: ["male", "female"]
+    },
+    admin: Boolean,
+    date: {type: Date, default: Date.now}
+});
+------------------------------------------------------------
+Course
+.find({author:/^Mosh/}) >> ^ for starts with
+.find({author:/Mosh$/}) >> $ for ends with
+.find({author:/.*Mosh.*/}) >> .* for contains with
+.findByIdAndUpdate(id, {e:U.e, p:u.p}) >> retrive nonupdated info
+.findByIdAndUpdate(id, {e:U.e, p:u.p},{new:true}) >> retrive updated info
+.findById(id).select('-password'); >> excludes password property;
+------------------------------------------------------------
+type		: String; Number; Date; boolean;
+default	: Date.now;
+required	: true;
+unique	: true;
+min		: (3);
+max		: (15);
+minlength	: 20;
+
+maxlength	: 22;
+enum		: ["male", 'female'];
+trim		: true;
+get		: v => Math.round(v);
+set		: v => Math.round(v);
+lowercase	: true;
+uppercase	: true;
+
+
+status 401 is invalid password/email;
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

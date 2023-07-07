@@ -1,0 +1,28 @@
+Sealed:
+------
+sealed public class Animal{....}// For Class
+public sealed override void run() {...} // For Method
+
+Constructor:
+-----------
+public class Employee{public Employee(){..}..}
+public class Employee{~Employee(){..}..}
+
+
+Creating/Reading Datatable:
+--------------------------
+    DataTable dt = new DataTable();
+    dt.Columns.Add("Sno");
+    dt.Columns.Add("Name");
+    dt.Rows.Add(1, "Raghunadh");
+    Console.WriteLine(dt.Rows[0].Field<string>(1));
+
+
+
+
+Important Points:
+=================
+
+Compare 2 same objects:
+-----------------------
+if (ReferenceEquals(befProcess, aftProcess)) return 0;

@@ -1,0 +1,25 @@
+ls 		>>	listout files;
+ls -al 		>>	listout (include hidden files);
+pwd		>>	present working directory;
+cd ..		>>	one step back;
+cd home/	>>	redirect to home directory;
+mkdir		>>	create directory/folder;
+touch		>>	create file;
+cat		>>	to read inside of the file;
+cat > fname	>>	create & write inside file;
+cntrl + D	>>	to exit from writing mode;
+rm		>>	removes file;
+rm -r		>>	removes folder;
+rm --help	>>	command narration;
+cp oName nName	>>	copy content to new file;
+cp sPath dPath	>>	copy file from source to destination;
+cp -r sPath dPath	>>	copy folder to destination path;
+mv sPath dPath	>>	cut & paste (can rename the file);
+rmdir		>>	
+
+chmod
+grep
+user maintanance
+installing
+
+

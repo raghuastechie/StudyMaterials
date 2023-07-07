@@ -1,0 +1,94 @@
+Async & Await:
+--------------
+function getHeadQuater(){
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            console.log('getting HeadQuarter Name..');
+            resolve('Hayatnagar');
+            console.log('got name...');
+        }, 2000);
+    })
+}
+async function LivingPlace(){
+    const a = await getHeadQuater();
+    console.log('Living @ ' + a);
+}
+LivingPlace();
+*************x*************x*************x*************
+Promises:
+---------
+const p = new Promise((resolve, reject) => {
+    let result = false;
+    if(result){
+        resolve('Everything went correct');;
+    } else {
+        reject('Something went wrong');
+    }
+});
+p.then(res => console.log(res)).catch(err => console.log(err));
+-------->>>>>>>>
+const p = new Promise((resolve, reject) => {
+    let result = true;
+    if(result){
+        resolve({id: 2, username: 'raghunadh'});
+    } else {
+        reject({id: 0, username: 'default'});
+    }
+});
+
+p
+.then(res => {
+    console.log(`+ 3 : ${res.id + 3}`);
+})
+.catch(err => {    
+    err.id == 0 ? console.log('id is ZERO: ' + err.id): console.log('UnExpected');
+});
+*************x*************x*************x*************
+Callbacks:
+---------
+console.log('before');
+getUser(1, (user) => {
+    console.log('user', user)
+});
+console.log('after');
+function getUser(id, callback){
+    setTimeout(() => {
+        callback({id: id, name: 'raghunadh'});        
+    }, 2000)
+}
+*************x*************x*************x*************
+EventEmitter Class:
+-------------------
+const EventEmitter = require('events');
+const eventEmitter = new EventEmitter();
+  
+eventEmitter.on('start', () => {
+    console.log('started');
+  });
+
+eventEmitter.emit('start');
+*************x*************x*************x*************
+Middleware Functions:
+---------------------
+function middleFun(req, res, next){
+    console.log('before..');
+    next()    
+ }
+
+app.get('/', middleFun, (req, res) => {    
+    res.send('Home Pages Info..');
+});
+*************x*************x*************x*************
+Map for Array:
+-------------
+const a = [12, 13, 14];
+//const b = a.map(x => x * 2); //result = [ 24, 26, 28 ]
+//const c = a.map(x => `${x}-aaa`);// result = [ '12-aaa', '13-aaa', '14-aaa' ]
+const d = a.map(x => printA(x));
+function printA(a){
+    return a * 3
+}
+console.log(d);
+*************x*************x*************x*************
+
+

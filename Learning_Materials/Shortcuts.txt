@@ -1,0 +1,13 @@
+Git Pending Points:-
+. GitLAB;
+
+
+
+
+
+
+
+
+
+Cntrl + M >>	Collapse
+Cntrl + L >>	Expand

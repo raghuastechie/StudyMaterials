@@ -1,0 +1,61 @@
+Web Services: Service available over the web.
+-enables communication between applications over the web.
+-provides a standard protocol/format for communication.
+-platform independent communication.
+-using web services 2 different applications can talk to each other and exchange data information.
+
+SOAP:
+Simple Object Access Protocol
+Medium: HTTP (POST);
+Format: XML;
+Specifications (Structure): {Envelop => [Header; Body]} (XML)
+
+-All information/message exchange happens over a common format: XML;
+-XML messages have a defined structure: SOAP message;
+- SOAP Message consist of 'Envelop, Header, Body';
+
+
+-A web service that complies to the SOAP Web Services Specifications is a SOAP Web Service;
+-W3C (World Wide Web Sonsortium) for standards;
+-Specifications Rules: SOAP, WSDL, UDDI;
+
+
+REST:
+REpresentational State Transfer
+Medium: HTTP (Post, Get, Put, Delete);
+Format: XML/JSON/TEXT
+-A web service that communicates/exchanges information between 2 applications using REST architecture/principles is called a RESTful web Service.
+*Principles: Uniform Interface; Stateless; Cacheable; Layered System; Code on Demand(Optional);
+
+------------
+*Uniform Interface: 
+. Resource: everything is a rousource;
+. URI: any data can be accessed by a URI;
+. HTTP: make explicit use of HTTP methods;
+-Identification of Resources:- Resources+URI+HTTP;
+Each resource has a URI and is accessed through a defined set of HTTP methods (Get, Put, Post, Delete);
+
+-Manipulation Of Resources using Representations:
+Each resource can have one or more representations. Such as application/xml, application/json, text/html, etc., Clients and servers negotiate to select representation.
+
+-Self descriptive messages:
+Requests and responses contain not only data but additional headers describing how the content should be handled. Such as if it should be cached, authentication, requirements, etc.,
+
+*Stateless: all client-server commnications are stateless;
+-Server should not require to store the state of a session; If the concept of a session is rquired all informatin should be stored at client side and sent with every subsequent request. Which reduce the burden & improves the performance.
+*Caching: happens at client side;
+
+*Layering: layers can exist between client and server;
+*Code On Demand: ability to download and execute code on client side;
+
+
+
+
+WSDL:
+Web Services Description Language
+Is an XML based interface that is used to describe the functioanlities of the Web Services.
+XML is machine readable.
+
+
+UDDI:
+Universal Description, Discovery and Integration.

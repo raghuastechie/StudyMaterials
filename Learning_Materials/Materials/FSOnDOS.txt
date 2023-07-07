@@ -1,0 +1,98 @@
+using System.IO;
+
+Directory.CreateDirectory(@"D:\Documents\Consolidated\RRR"); //4 create folder
+File.Create(@"D:\SampleFolder\a.txt"); // 4 create file
+
+bool ext = Directory.Exists(@"D:\Documents\"); // 4 find folder existance
+bool ext = File.Exists(@"D:\SampleFolder\a.txt") // 4 find file existance
+
+var files = Directory.GetFileSystemEntries(@"D:\Documents\"); //4 folders & files
+var file = Directory.GetDirectories(@"D:\Documents\"); // 4 folders
+var file = Directory.GetFiles(@"D:\Documents\"); // 4 files
+
+Path.GetFileName(item); // 4 get only file name
+var file = Directory.GetFiles(@"D:\Documents\", "New*.txt"); // 4 get files with filter
+
+File.Move(@"D:\SampleFolder\c.txt", @"D:\SampleFolder\KK.txt");
+Directory.Move(@"D:\SampleFolder\D", @"D:\SampleFolder\KK");
+
+File.Delete(@"D:\Documents\Consolidated\XL.xlsx"); // 4 delete file
+Directory.Delete(@"D:\SampleFolder\a"); // 4 delete folder
+
+AppDomain.CurrentDomain.BaseDirectory; // from where the file deploying
+-----------------------
+    Directory.CreateDirectory(@"C:\FSO\OSF");
+    var exst = Directory.Exists(@"C:\FSO\OSF");
+    if (exst == true)
+    {
+        Directory.Delete(@"C:\FSO\OSF");
+        Console.WriteLine("Deleted..");
+    }
+    else
+    {
+        Directory.Move(@"C:\MV", @"C:\FSO\MV");
+        Console.WriteLine("Moved..");
+    }
+-----------------------
+      TextReader tr = File.OpenText(@"D:\FSO\A.txt");
+      string ttx = tr.ReadToEnd();
+      tr.Close();
+      string newtxt = "Hello Ravekanth Success Address";                
+      TextWriter tw = File.CreateText(@"D:\FSO\A.txt");
+      tw.WriteLine(ttx + newtxt);
+      tw.Close();
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------
+DOS Commands:
+------------
+DIR >> See the contents of a directory
+CD >> Change and switch between directories and folders.
+CD.. >> go back to the previous directory or folder.
+CD\ >> jump to first parent directory
+MD >> Make a directory or a folder
+RD >> Remove a directory or a folder.
+Del >> delete a file
+Move >> move a file
+Copy >> copy a file.
+
+Note: "\" & "/" are equal while specifing.	
+--------------------------------------------------------------------
+
+Ponts:
+\n for new line
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,53 @@
+
+LINQ:
+----
+Foreach:
+-------
+	result.ToList().ForEach(s => stlist.Add(s.Name));
+	resul2.ToList().ForEach(d => Console.WriteLine(d));
+
+SELECT:
+-------
+Con.NMES.Select(s => new { Name = s.NAME, Location = s.LOCATION });
+from s in Con.NMES select new { s.NAME, s.LOCATION };
+select * from NMES
+
+
+WHERE, StartsWith, EndsWith, ContainsWith & And:
+-----------------------------------------------
+DB.NMES.Where(s => s.NAME.StartsWith("R") && s.NAME.Contains("A") && s.NAME.EndsWith("U"));
+from s in DB.NMES where s.NAME.StartsWith("R") && s.NAME.EndsWith("U") && s.NAME.Contains("a") select new { s.NAME, s.LOCATION };
+select * from NMES where NAME like ('R%') and NAME like ('%U') and NAME like ('%a%')
+
+
+DISTINCT:
+---------
+DB.NMES.Select(s => new { location = s.LOCATION}).Distinct();
+(from s in DB.NMES select s.LOCATION).Distinct();
+select distinct LOCATION from NMES
+
+
+OrderBy/OrderBy x Descending:
+-------------------------
+DB.NMES.OrderBy/OrderByDescending(x => x.Age).Take(3);
+from s in DB.NMES orderby s.ID descending select s;
+select * from nmes order by ID asc/desc
+
+ALL & ANY: Retuns bool value:
+-----------------------------
+DB.NMES.Where(x => x.NAME.StartsWith("R")).ALL/ANY(y => y.NAME.EndsWith("U"));
+(from s in strList where s.Contains("z") select s).Any();
+
+
+First || FirstOrDefault && Last || LastOrDefault:
+-------------------------------------------------
+strList.First/FirstOrDefault(s => s.Length == 4);
+(from s in strList where s.Length >= 4 select s).First/FirstOrDefault();
+strList.Last/LastOrDefault(s => s.Length == 4);
+(from s in strList where s.Length >= 4 select s).Last/LastOrDefault();
+
+
+ThenBy/ThenByDescending:
+-----------------------
+Will apply the sorting after getting the results.
+var filterresult = studentList.OrderBy(s => s.StudentName).ThenBy(s => s.Age);

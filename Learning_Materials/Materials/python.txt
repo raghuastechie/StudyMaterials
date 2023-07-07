@@ -1,0 +1,29 @@
+print()
+input()
+string[0:3]
+int(str)
+float(str)
+boolean(str)
+round(2.9)
+abs(-1.9) >> always positive int
+len(str)
+name.upper()
+name.lower()
+name.find('R')
+name.replace('a','A')
+Formatted String = f'{fname}[{sname}] is a coder'
+print('Python' in name) >> boolean value
+Maths:
+math.floor(2.9)
+math.ceil(1.9)
+
+
+
+
+
+Maths Precedence:
+parenthesis()
+Exponentiation 2**3 [** means ^]
+multiplication or divison
+addition or substaction
+

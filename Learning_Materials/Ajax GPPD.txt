@@ -1,0 +1,52 @@
+<script>
+        function getDetails(){
+            var txt = "";
+            $.getJSON(
+                URL = 'http://localhost:62241/api/punnamAPI',
+                success = function(data){
+                    $.each(data, function(key, value){
+                        txt = txt + value.name + "; ";
+                    });
+                    $("#mainframe").text(txt);
+                }                
+            );
+        }
+
+        function postDetails(){
+            var user = {
+                'name' : 'Ravikiran',
+                'sunof' : 'Rajashekar'
+            }
+            $.post('http://localhost:62241/api/punnamAPI', user, function(data, status){
+                alert(data);
+                alert(status);
+            });
+        }
+
+        function putDetails(){
+            var user = {
+                'name' : 'HariBabu',
+                'sunof' : 'Anand'
+            }
+            $.ajax({
+                url: 'http://localhost:62241/api/punnamAPI?id=' + 14,
+                type: 'PUT',
+                data: user,
+                success: function(data, status){
+                    alert(status);
+                }
+            });
+            alert ("putDetails");
+        }
+
+        function deleteDetails(){
+            $.ajax({
+                url: 'http://localhost:62241/api/punnamAPI?id=17',
+                type: 'DELETE',
+                success: function(data, status){
+                    alert(data),
+                    alert(status);
+                }
+            });
+        }
+    </script>

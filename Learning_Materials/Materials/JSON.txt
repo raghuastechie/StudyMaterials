@@ -1,0 +1,17 @@
+JSON in C#: [https://jsonplaceholder.typicode.com/posts/1]
+-----------
+IList<Std> Stds = JsonConvert.DeserializeObject<List<Std>>(JsonString);
+"JsonConvert.DeserializeObject" converts string as C# Object.
+
+var JsonString = JsonConvert.SerializeObject(CObject);
+"JsonConvert.SerializeObject" converts C# Object to string.
+
+JSON in Script:
+--------------
+var JsonString = JSON.stringify(JSObject);
+"JSON.stringify()" converts JS Object to string.
+
+var JSObject = JSON.parse(JsonString);
+"JSON.parse()" converts string to JS Object.
+
+// return Json(Result, JsonRequestBehavior.AllowGet);

@@ -1,0 +1,17 @@
+Cntrl + M >>	Collapse
+Cntrl + L >>	Expand
+
+
+search in solutin Level: Ctrl + ;
+Comment: Ctrl + K + C;
+UnComment: Ctrl + K + U;
+Immediate Window: Ctrl + Alt + I;
+Adding New Item:  Ctrl + Shft + A;
+Adding Existing Item: Shft + Alt + A;
+Solution Expolorer: Ctrl + Alt + L;
+Full Screen: Shft + Alt + Enter;
+Goto: Ctrl + G;
+Uppercase: Ctrl + Shft + U;
+LowerCase: Ctrl + U;
+Move line up: Alt + UpArw;
+Move line down: Alt + DwnArw;

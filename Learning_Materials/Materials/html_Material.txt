@@ -1,0 +1,8 @@
+inCode:
+"!" + tab >> generate default code.
+"<!" + tab >> <!DOCTYPE html>
+
+Tags:
+h(series), p, a, img, button, ul, ol, li, 
+
+<br> >> line break.

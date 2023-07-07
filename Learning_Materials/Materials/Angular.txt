@@ -1,0 +1,186 @@
+cli; imports; Path Route; Router; ActivatedRoute; validations; directives; authentication;
+---------------------------------------------------------------------------------
+
+npm install -g @angular/cli(@latest); 
+ng new projName --routing; ng g c CompoName; ng g s ServiceName; ng g guard auth;
+node -v; ng --v; ng serve (-o)	>>	run in and opens browser; (http://localost:4200/);
+
+import { Component, OnInit } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { IEmployee } from './employee';
+import { Router } from '@angular/router'; >> router.navigation
+import { ActivatedRoute } from '@angular/router'; >> route.paramMap.subscribe
+
+@Component({
+selector: '',
+templateUrl: '',
+styleUrls: []
+})
+
+@NgModule({
+declarations:[],
+imports: [],
+providers: [],
+exports: [],
+bootstrap: []
+})
+
+
+declarations: 	new components declarations here
+imports: 	services imports here
+providers: 	new componentServices here
+
+{path: 'colors', component: colorsComponent},
+{path: 'colors:id', component: colorsComponent},
+{path: '', redirectTo:'/login', pathMatch: 'prefix/full'},
+{path:'**', component: pageNotFoundComponent}
+
+Consume Service:
+---------------
+getEmployees(): Observable<IEmployee[]> {return this.http.get<IEmployee[]>(this._url);}
+
+this.employeeService.getEmployees().subscribe(data => this.employeedetails = data);
+
+
+Router:
+-------
+this.router.navigate(['/departments']);
+this.router.navigate(['/departments',department.id]);
+this.router.navigate(['/departments', {id: selectedId, test: 'testvalue'}]);
+this.router.navigate([department.id], {relativeTo: this.route});
+this.router.navigate(['../',{id: selectedId}], {relativeTo: this.route});
+this.router.navigate([employee.id], {id:color.id});
+
+this.router.navigate([employee.id], {relativeTo:this.route});
+
+ActivatedRoute:
+---------------
+constructor(private route: ActivatedRoute){ }
+parseInt(this.route.snapshot.paramMap.get('id'));
+this.route.paramMap.subscribe((params: ParamMap) => this.id = parseInt(params.get('id')));
+
+export interface IBrother{ id: number;     name: string;    location: string; }
+[{"id": 1, "name": "vignesh", "location":"kphb"}, {"id": 2, "name": "srikanth", "location":"pamarru"}]
+
+cd newFolder; md newFolder;
+<a routerLink="/departments">Departments</a>
+
+*ngIf='_aService.loggedIn()'
+
+if(err instanceof HttpErrorResponse){
+	if(err.status === 401){
+		this.router.navigate(['/login']);
+	}
+}
+
+
+Forms:
+------
+Template Driven Forms:
+----------------------
+touched 	>> Control visited
+untouched	>> Control unvisited
+dirty		>> Control's value changed
+pristine	>> Control's value unchanged
+valid		>> Control's value valid
+invalid		>> Control's value invalid
+
+
+Directives:
+-----------
+*ngFor='let color of colors; index as i' >> <a>{{color}}</a>
+*ngIf='true' >> will visible;
+*ngIf='true; then thenBlock else elseBlock'
+	ng-template #thenBlock
+	ng-template #elseBlock
+
+
+Reactive Forms:
+--------------
+
+Session Storage/Local Storage:
+------------------------------
+localStorage.setItem('key', 'Value');
+sessionStorage.setItem('key', 'Value');
+localStorage.getItem('key');
+sessionStorage.getItem('key');
+sessionStorage.removeItem('key');
+sessionStorage.clear();
+
+Headers: content-type - application/json;
+
+*Generating Token:
+------------------
+const jwt = require('jsonwebtoken');
+let payload = {subject: usr._id};
+let token = jwt.sign(payload, 'secretKey');
+res.status(200).send({token});
+
+*Storing Token:
+---------------
+localStorage.setItem('token', res.token);
+this.router.navigate(['/events']);
+
+*CanActivate:
+------------
+auth.service => loggedIn(){ return !!localStorage.getItem('token'); }
+auth.guard => canActivate():boolean{
+    if(this.authService.loggedIn()){
+      return true;
+    } else {
+      this.router.navigate(['/login']);
+      return false;
+    }
+  }
+routing => {path: 'specialevents', component: SpecialeventsComponent, canActivate: [AuthGuard]},
+
+*Interceptor:
+-------------
+app.module => {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+  }
+
+token-interceptor.service => 
+export class TokenInterceptorService implements HttpInterceptor {
+  constructor(private injector: Injector) { }
+  intercept(req, next){
+    let tokenizedReq = req.clone({
+      setHeaders:{
+        //Authorization: 'Bearer xx.yy.zz',
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    })
+    return next.handle(tokenizedReq);
+  }
+}
+
+*Verify:
+-------
+Db => function verifyToken(req, res, next){
+    if(!req.headers.authorization){
+        return res.status(401).send('unauthorized request');
+    }
+    let token = req.headers.authorization.split(' ')[1];    
+    if(token === 'null'){
+        return res.status(401).send('unauthorized request');
+    }    
+    let payload = jwt.verify(token, 'secretKey');
+    if(!payload){
+        return res.status(401).send('unauthorized request');
+    }
+    req.userId = payload.subject;
+    next();
+}
+router.get('/specialevents', verifyToken, (req, res) => { }
+jwt creates token with payload and send token as status;
+store the token as local storage;
+in auth service canActivate method checks the token existance and give access as true or false;
+httpinterceptor clones the reqest and create the bearer token;
+verify funciton will check the available bearer token with payload and return the access
+--------------- END ---------------

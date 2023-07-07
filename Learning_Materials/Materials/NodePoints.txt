@@ -1,0 +1,181 @@
+Node.JS:
+--------------------------
+**************************
+
+to run >> node test(js);
+
+Declarations:
+------------
+const name = 'raghunadh';
+const num = 1234;
+const ary = ['ravi', 'raghu', 'raju'];
+const obj = {'name': 'raghunadh', 'age': 38};
+console.log(name, num, ary, obj);
+**************************
+
+Path, DirName & FileName:
+--------------------------
+console.log(__dirname);
+console.log(__filename);
+**************************
+
+Calling & Creating Function:
+----------------------------
+const great = (a) => console.log(`hello, ${a}`);
+console.log(great('Raghunadh'));
+**************************
+
+SetTimeOut & SetInterval:
+-------------------------
+setTimeout(() => {
+    console.log(great('timelapse'));
+    clearInterval(x);
+}, 10000);
+let y = 1;
+const x = setInterval( () => {
+    y++;
+    console.log(great(y));
+}, 1000)
+**************************
+Modules:
+--------
+in test.js:
+const university = ['Osmania', 'Kakatiya', 'Nagarjuna'];
+const collageName = 'chanakya';
+module.exports = {collageName, university};
+const {EM, fM, wifeName, nName} = require('./EM');
+module.exports = {EM, fM: [daughterName, sonName, wifeName], wifeName, nName: {'n': 'm'}};
+
+in main.js:
+const tst = require('./test');
+const {bros} = require('./test');
+console.log(tst);
+console.log(tst.university);
+console.log(bros);
+@Output:
+{
+  collageName: 'chanakya',
+  university: [ 'Osmania', 'Kakatiya', 'Nagarjuna' ]
+}
+[ 'Osmania', 'Kakatiya', 'Nagarjuna' ]
+**************************
+File System Alteration:
+-----------------------
+const fs = require('fs');
+//reading files------------
+fs.readFile('./rFile.txt', (err, data) => {
+    if(err) console.log(err);
+    //console.log(data.toString());
+    cont = data.toString();
+});
+
+//writing files-------------
+fs.writeFile('./rFile.txt', 'extra content added;', () => {    
+    console.log('file was successfully written')
+});
+// directories--------------
+if(!fs.existsSync('./assets')){
+    fs.mkdir('./assets', (err) => {
+        if(err) console.log(err);
+        console.log('folder created');
+    });
+} else {
+    fs.rmdir('./assets', (err) => {
+        if(err) console.log(err);
+        console.log('folder deleted');
+    });
+}
+// delete files--------------
+if(fs.existsSync('./rFile2.txt')){
+    fs.unlink('./rFile2.txt', (err) => {
+        if(err) console.log(err);
+        console.log('file deleted..');
+    })
+}
+**************************
+Read & Write Streams:
+---------------------
+const fs = require('fs');
+const readStream = fs.createReadStream('./index.txt', {encoding: 'utf8'});
+const writeStream = fs.createWriteStream('./index2.txt');
+readStream.on('data', (chunk) => {
+    console.log('------New CHUNK-------');
+    console.log(chunk);
+    writeStream.write('\nNEW CHUNK');
+    writeStream.write(chunk);
+})
+**************************
+Creating Server & Routing:
+--------------------------
+const http = require('http');
+const fs = require('fs');
+const server = http.createServer((req, res) => {
+    //console.log(req.url);
+    //set header content type
+    //res.setHeader('content-type', 'text/plain');
+    res.setHeader('content-type', 'text/html');
+    //fs.readFile('./index.html', (err, data) => {
+    let path = './';
+    switch(req.url){
+        case '/':
+            path += 'index.html';
+ 		  res.statusCode = 200;
+            break;
+        case '/about':
+            path += 'about.html';
+            break;
+        default:
+            path += '404.html';
+            break;
+    }
+    fs.readFile(path, (err, data) => {
+        if(err){
+            console.log(err);
+        } else {
+            res.write(data);
+        }
+        //res.end(data);
+        res.end();        
+    })
+    // res.write('<p>hello tuts</p>');
+    // res.write('raghunadh');
+    //res.end();
+});
+server.listen(3000, 'localhost', () => {
+    console.log('Listening on 3000');
+})
+**************************
+//fs.writeFile(fPath, dt, (err) => if(...));
+//fs.appendFIle(fPath, dt, (err) => if(...));
+//fs.readFile(fPath, (err, data) => if(...));
+//fs.readFiles(fPath, (err, files) => if(...));
+//fs.unlink(fPath, (err) => if(...));
+//fs.existsSync(fPath);
+
+//module.exports = {}
+//const {fruits} = require('./main');
+//const ages = main.ages;
+//__dirname => directoryName;
+//__filename => fileName;
+--------------------------
+**************************
+const emt = require('events');
+let eventEmitter = new emt.EventEmitter();
+
+eventEmitter.on('hey', () => {
+    console.log('Hey!!');
+});
+eventEmitter.on('how are u', () => {
+    eventEmitter.emit('hey');
+    console.log('How Are You ?');
+});
+
+eventEmitter.emit('how are u');
+**************************
+
+loaerdash lib";
+axios;
+ramda;
+date.fns; luxon;
+classnames;
+proptypes;

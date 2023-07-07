@@ -1,0 +1,42 @@
+Common Code for DB Connections in Node with Express;
+----------------------------------------------------
+*npm install mysql2;
+
+var mysql = require('mysql2');
+var config = {
+    host: "localhost", port: 3306, database: 'EDXI',
+    user: "root", password: "R@ghu999nadh"
+};
+let con = mysql.createConnection(config);
+con.connect((err) => {
+    if (err) {
+        console.log("Ohh!! Sorry Not Connected");
+        console.log(err);
+    } else {
+        console.log("YEAH!! Its Connected");
+    }
+});
+****************************************************
+*npm install mssql; npm install msnodesqlv8;
+
+let sql = require("mssql/msnodesqlv8");
+var config = {
+    user: '', password: '', database: "EDXI",
+    server: "DESKTOP-FUGQNF4\\SQLEXPRESS",
+    options: {
+        trustedConnection: true
+    }
+};
+sql.connect(config)
+    .then(a => console.log('YEAH !! Connected'))
+    .catch(err => console.log('Ohh !! Sorry Not Connected..'));
+****************************************************
+*npm install mongoose;
+
+const mongoose = require('mongoose');
+const db = 'mongodb://localhost:27017/EDXI';
+mongoose.connect(db)
+    .then(a => console.log('YEAH !! Connected'))
+    .catch(err => console.log('OHH!! Sorry Not got connected'));
+
+****************************************************

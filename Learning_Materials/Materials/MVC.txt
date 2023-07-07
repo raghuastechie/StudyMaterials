@@ -1,0 +1,48 @@
+RedirectToAction >> will navigate within controller.
+Redirect >> will navigate external Controller.
+
+[HttpGet("test")]
+[HttpGet("{application}/{datasource}")]
+[Produces("application/json")]
+[Route("api/docdownload")]
+
+
+
+For Paging:
+>> Install PagedList.mvc
+In Controller Level:
+-------------------
+>> using PagedList; 	using PagedList.Mvc;
+public ActionResult Index(string search, int? page)
+ { return View(Movie.MovieLists.Where(x => x.LANGUAGE == search || search == null).ToList().ToPagedList(page ?? 1, 3)); }
+
+In View:
+-------
+@using PagedList;	@using PagedList.Mvc;
+
+IEnumerable<Vidly.Models.MovieList> => IPagedList<Vidly.Models.MovieList>
+@Html.DisplayNameFor(model => model.MOVIENAME) => @Html.DisplayNameFor(model => model.First().MOVIENAME)
+
+@using (Html.BeginForm("Index", "Movies", FormMethod.Get))
+{  @Html.TextBox("search")<input type="submit" value="Searchsubmit" />  }
+
+Note: Youtube: Kudvenkat MVC(62, 63, 64):
+For Sorting:
+
+>> inControll:
+ViewBag.sortParameter = string.IsNullOrEmpty(sort) ? "SNO" : "";
+       var movieList = Movie.MovieLists.AsQueryable();
+       movieList = Movie.MovieLists.Where(x => x.LANGUAGE == search || search == null);
+       if (string.IsNullOrEmpty(sort))
+       {   movieList = movieList.OrderBy(x => x.SNO);   }
+       else{   movieList = movieList.OrderByDescending(x => x.SNO);   }
+       return View(movieList.ToList().ToPagedList(page ?? 1, 3));
+
+>> inView:
+<th>
+   @*@Html.DisplayNameFor(model => model.First().SNO)*@
+   @Html.ActionLink("SNO", "Index", new { sort = ViewBag.sortParameter })
+</th>
+
+
+

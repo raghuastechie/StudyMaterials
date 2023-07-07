@@ -1,0 +1,78 @@
+Check version of NODE:
+>> node -v
+
+run app:
+>> node app.js
+
+Module props turn to public: 
+>> module.exports.url = url;
+>> var logger = require('./count');
+
+Wrapping Modules [Module Wrapper Function]: 
+>> function(export, require, module, __filename, __dirname){ }
+
+React: 
+Prettier plugin for formatting.
+Simple React Snippets for snippets.
+ES7/React/Redux
+
+Create React App: 
+>> npx create-react-app react-app //[will take while]
+
+To install: 
+>> npm i bootstrap@4.1.1
+
+Start React App:  //[launch in chrome]
+>> npm start
+
+Multiple Cursor: 
+>> Cntrl + D 
+
+If Condition: 
+>> return this.state.count === 0 ? 'Zero' : this.state.count;
+
+Loop: 
+{this.state.tags.map(tag => <li key={tag}>{tag}</li>)}
+
+Increment:
+Increment = () => {
+        this.setState({no: this.state.no + 1});
+    }
+
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css'; 
+
+const ele = <h1>Hello World</h1>;
+ReactDOM.render(ele, document.getElementById("root")); //[index.html id]
+
+-----------------
+import React, {Component} from "react";
+
+class Counter extends Component {
+	render(){
+	return(<div>......</div>);//[<React.Fragment></React.Fragment>]
+	}}
+export default Counter;
+
+-----------------------------------------------------------------------
+URL Fetching:
+-------------
+class FetchRandomUser extends Component{
+    state = {
+        loading: true,
+        person: null,
+    }
+    async componentDidMount(){
+        const url = "user.json";
+        const response = await fetch(url);
+        const data = await response.json();
+        this.setState({person: data.results[0], loading: false})
+    }
+    render(){
+        return(
+            <div>{this.state.loading || !this.state.person ?(<div>loading...</div>):(
+            <div><div>{this.state.person.name.title}</div></div>)}</div>
+         );
+    }
+}
