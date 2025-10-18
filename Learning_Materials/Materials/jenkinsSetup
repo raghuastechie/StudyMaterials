@@ -1,0 +1,97 @@
+
+
+
+Stpes to follow: >> install 	1. Git | 2. JDK | 3. Jenkins | 4. Tomcat Apache
+
+Create Ec2 Instance with Amazon Linux Server;
+sudo yum update -y
+
+1. Git:
+	sudo yum install git -y
+	git --version
+	https://github.com/raghuastechie/raghus-web.git
+2. JDK:
+	java -version
+	sudo yum install java-21-amazon-corretto-devel -y
+3: Jenkins:
+	sudo wget -O /etc/yum.repos.d/jenkins.repo \
+	https://pkg.jenkins.io/redhat-stable/jenkins.repo
+	sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+	sudo yum install jenkins -y
+	sudo systemctl enable jenkins
+	sudo systemctl start jenkins
+	sudo systemctl status Jenkins
+ * add JDK:
+	JDK21 && /usr/lib/jvm/java-1.8.0-amazon-corretto.x86_64/
+ * add Maven:
+	Maven 3.6 && select 3.6.1 (Dropdown)
+4: Tomcat Apache
+	wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.105/bin/apache-tomcat-9.0.105.tar.gz
+	tar -xvf apache-tomcat-9.0.105.tar.gz
+ * allow other IPs: /home/ec2-user/apache-tomcat-9.0.105/webapps/manager/META-INF/context.xml
+	>> context > valve > allow=".*"
+ * Start || Stop Tomcat: >> bin folder / ./startup.sh (Start) || ./shutdown.sh (Stop)
+ * Port Change: in conf folder >> vi server.xml >> connector.port = 9090;
+ * adding users: in conf folder >> vi tomcat-users.xml >> add below text
+	<role rolename="manager-gui" />
+	<user username="tomcat" password="tomcat" roles="manager-gui" />
+	<role rolename="admin-gui" />
+	<role rolename="manager-script" />
+	<user username="admin" password="admin" roles="manager-gui,manager-script,admin-gui" />
+
+==============================================================================================================
+1:  Setup Ansible:
+	Created 2 EC2 (Host & serverNode)
+ * For both Systems:
+	$ sudo useradd ansible;
+	$ sudo passwd ansible (pw: ansible);
+	$ sudo visudo	>>	ansible ALL=(ALL) NOPASSWD: ALL (near @ root ALL=(ALL)   ALL);
+	$ sudo vi /etc/ssh/sshd_config;
+	 > comment PasswordAuthentication no;
+	 > un-commnet PasswordAuthentication yes;
+	 > Restart the server;
+	$ sudo service sshd restart;
+ * install python
+	$ sudo yum install python3 -y; > check python3 --version;
+	$ sudo alternatives --set python /usr/bin/python3	(update python3 alternatives);
+	$ sudo yum -y install python3-pip 	(Installing python package manager - PIP);
+	$ pip3 install ansible --user 	(installing Ansible using Python PIP);
+	$ ansible --version;
+	$ sudo mkdir /etc/ansible;
+	$ sudo vi /etc/ansible/ansible.cfg
+	 > copy from this url and past it in ansible.cfg. (https://github.com/ansible/ansible/blob/stable-2.9/examples/ansible.cfg)
+	$ sudo vi /etc/ansible/hosts; ();
+------------------------------- Ansible Setup Completed -------------------------------
+$ sudo vi /etc/ansible/hosts 	(update host inventory in ansible host file for test connection);
+-------------
+1st approach:
+-------------
+  $ Connect using username and password;
+    > HOST-NODE-IP ansible_user=ansible ansible_password=password;
+-------------
+2nd approach:
+-------------
+  $ sudo su ansible
+  $ ssh-keygen
+  $ ssh-copy-id ansible@172.31.8.123
+$ ansible all -m ping
+
+$ ansible 'all/ groupname/ hostname/ ip' -m 'module-name' -a arguments;
+$ ansible all -m shell -a 'service sshd status';
+$ ansible all -m shell -a 'du -h';
+$ ansible all -m shell -a 'yum git install'
+-----------------------------------------------------------
+id: 366840108622;
+3r4rss@gmail.com
+R@g9....
+
+-----------------------------------------------------------
+echo "Hello"
+touch raghu.txt
+echo "Test to Jenkins" >> raghu.txt
+echo "Completed"
+-----------------------------------------------------------
+https://raw.githubusercontent.com/ansible/ansible/devel/examples/ansible.cfg
+https://raw.githubusercontent.com/ansible/ansible/devel/examples/hosts
+
+
