@@ -1,0 +1,239 @@
+
+Maven Proj Creation:
+----------------------------------------
+>> standalone:				>> web application: 
+archetype: generate				archetype:generate
+groupId=in.ashokit				groupId=in.ashokit
+artifactId=01-Maven-App			artifactId=01-maven-web-app
+archetypeArtifactId=maven-arcetype-quickstart	archetypeArtifactId=maven-archetype-webapp
+interactiveMode=false			interactiveMode=false
+Maven Goals: clean | compile | test | package | install;
+----------xx----------xx----------xx--------------------xx----------xx----------xx----------
+Apache Tomcat Creation:
+--------------------------------------------
+in ec2: 
+javaLink		>>	https://download.oracle.com/java/21/latest/jdk-21_linux-aarch64_bin.tar.gz
+**sudo yum install -y java-21-amazon-corretto-devel
+tomcatLink	>>	https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.111/bin/apache-tomcat-9.0.111.tar.gz
+java Install ?---------------------------
+sudo yum install java-1.8.0-openjdk
+sudo yum install -y java-21-amazon-corretto-devel
+java -version-------------------------
+
+tomcat Install ?
+wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.111/bin/apache-tomcat-9.0.111.tar.gz
+tar -xvf 'tomcat-tar-file-name'
+/home/ec2-user/apache-tomcat-9.0.105/bin----------------
+./startup.sh
+./shut...sh
+
+home/ec2-user/apache-tomcat-9.0.105/conf/tomcat-users.xml
+<role rolename="manager-gui" />
+<user username="tomcat" password="tomcat" roles="manager-gui" />
+<role rolename="admin-gui" />
+<user username="admin" password="admin" roles="manager-gui,admin-gui" />
+
+<role rolename="manager-script" />
+<user username="admin" password="admin" roles="manager-gui,admin-gui,manager-script" />
+
+change access: /home/ec2-user/apache-tomcat-9.0.105/webapps/manager/META-INF/context.xml
+change context.value.allow = ".*"
+change port: /home/ec2-user/apache-tomcat-9.0.105/conf/serve.xml >>	connector.port;
+
+65.1.108.87:8080/01-maven-web-app
+----------xx----------xx----------xx--------------------xx----------xx----------xx----------
+jenkins Instalation:
+----------------------------------
+
+sudo yum remove java*
+java -version
+sudo yum install java-11-openjdk java-11-openjdk-devel -y
+
+sudo wget -O /etc/yum.repos.d/jenkins.repo \
+https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+sudo yum upgrade
+# Add required dependencies for the jenkins package
+sudo yum install fontconfig java-21-openjdk
+sudo yum install jenkins
+
+sudo systemctl status jenkins
+sudo systemctl enable jenkins
+sudo systemctl start jenkins
+sudo systemctl restart jenkins.service (*If not starts)
+
+echo "Hi Raghunadh'
+touch raghu.txt
+echo "best of luck raghu" >> raght.txt
+echo "completed"
+
+password: 4ced6167bb8e4f00abb025013fac9d5e
+----------xx----------xx----------xx--------------------xx----------xx----------xx----------
+git url: https://github.com/raghuastechie/raghus-web.git
+http://13.12.11.10:8080
+https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.111/bin/apache-tomcat-9.0.111.tar.gz
+----------xx----------xx----------xx--------------------xx----------xx----------xx----------
+Install Jdk-11 in Amazon Linux:
+----------------------------------
+1. dump tar.gz file from local to linux server
+2. $ sudo tar -xvzf jdk-11.0.27_linux-x64_bin.tar.gz -C /opt/
+3. export JAVA_HOME=/opt/jdk-11.0.27
+    export PATH=$PATH:$JAVA_HOME/bin
+4. source /etc/profile
+
+----------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------
+Stpes to follow: >> install 	1. Git | 2. JDK | 3. Jenkins | 4. Tomcat Apache
+
+Create Ec2 Instance with Amazon Linux Server;
+sudo yum update -y
+
+1. Git:
+	sudo yum install git -y
+	git --version
+	https://github.com/raghuastechie/raghus-web.git
+2. JDK:
+	java -version
+	sudo yum install java-21-amazon-corretto-devel -y
+	java -version
+	yum list java*
+	sudo yum install java-11-corretto-x86_64
+	sudo yum remove java*
+	sudo yum install java-17-corretto-x86_64
+	which java
+3: Jenkins:
+	sudo wget -O /etc/yum.repos.d/jenkins.repo \
+	https://pkg.jenkins.io/redhat-stable/jenkins.repo
+	sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+	sudo yum install jenkins -y
+	sudo systemctl enable jenkins
+	sudo systemctl start jenkins
+	sudo systemctl status Jenkins
+	job list directory: var/lib/jenkins/workspace
+	to quit: url/exit
+ * add JDK:
+	JDK21 && /usr/lib/jvm/java-1.8.0-amazon-corretto.x86_64/
+	readlink -f $(which java)
+	/usr/lib/jvm/java-17-amazon-corretto.x86_64 		-	/bin/java
+	sudo vi /etc/profile
+	export JAVA_HOME=/usr/lib/jvm/java-21-amazon-corretto.x86_64
+	export PATH=$JAVA_HOME/bin:$PATH
+	(Ensure these below commands):
+	source /etc/profile
+	echo $JAVA_HOME
+	java -version
+	
+
+ * add Maven:
+	Maven 3.6 && select 3.6.1 (Dropdown)
+4: Tomcat Apache
+	wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.111/bin/apache-tomcat-9.0.111.tar.gz
+	tar -xvf apache-tomcat-9.0.111.tar.gz
+ * allow other IPs: /home/ec2-user/apache-tomcat-9.0.105/webapps/manager/META-INF/context.xml
+	>> context > valve > allow=".*"
+ * Start || Stop Tomcat: >> bin folder / ./startup.sh (Start) || ./shutdown.sh (Stop)
+ * Port Change: in conf folder >> vi server.xml >> connector.port = 9090;
+ * adding users: in conf folder >> vi tomcat-users.xml >> add below text
+	<role rolename="manager-gui" />
+	<user username="tomcat" password="tomcat" roles="manager-gui" />
+	<role rolename="admin-gui" />
+	<role rolename="manager-script" />
+	<user username="admin" password="admin" roles="manager-gui,manager-script,admin-gui" />
+
+* Deploy to Container:
+	WAR/EAR files: 	>>	**/*.war
+	Context path: 	>>	raghusWeb (project name in URL);
+	Container:	>>	Tomcat 9.x Remote / GlassFish / JBoss As 7x
+	Tomcat Credentials	>>	add Credentials;
+	Tomcat URL	>>	http:// ip address/9090
+* Build Pipeline:
+
+*forgot password jenkins:
+goto /var/lib/jenkins/config.xml >> make it 'useSecurity' as false;
+
+*port change in jenkins:
+/etc/sysconfig/jenkins	>> JENKINS_PORT=8081;
+
+*parameterized Jov:
+Choose 'Choice Parameter' and */${BranchName}
+
+users Default path:
+/var/lib/jenkins/users
+-----------------------
+1) 	Shell Script Execution;
+2)	Attaching Git, adding Credentials, ading JDK & Maven;
+3)	Build & Deploying with Maven & Tomcat (Deploy Container Plugin);
+4)	Build Pipeline (Build Pipeline Plugin);
+5)	Parameterized Build;
+6)	Security & Permissions;
+
+
+========================================================================
+4330631979
+4850601567
+===========
+1:  Setup Ansible:
+	Created 2 EC2 (Host & serverNode)
+ * For both Systems:
+	$ sudo useradd ansible;
+	$ sudo passwd ansible (pw: ansible);
+	$ sudo visudo	>>	ansible ALL=(ALL) NOPASSWD: ALL (near @ root ALL=(ALL)   ALL);
+	$ sudo vi /etc/ssh/sshd_config;
+	 > comment PasswordAuthentication no;
+	 > un-commnet PasswordAuthentication yes;
+	 > Restart the server;
+	$ sudo service sshd restart;
+ * install python
+	$ sudo yum install python3 -y; > check python3 --version;
+	$ sudo alternatives --set python /usr/bin/python3	(update python3 alternatives);
+	$ sudo yum -y install python3-pip 	(Installing python package manager - PIP);
+	$ pip3 install ansible --user 	(installing Ansible using Python PIP);
+	$ ansible --version;
+	$ sudo mkdir /etc/ansible;
+	$ sudo vi /etc/ansible/ansible.cfg
+	 > copy from this url and past it in ansible.cfg. (https://github.com/ansible/ansible/blob/stable-2.9/examples/ansible.cfg)
+	$ sudo vi /etc/ansible/hosts; ();
+------------------------------- Ansible Setup Completed -------------------------------
+$ sudo vi /etc/ansible/hosts 	(update host inventory in ansible host file for test connection);
+-------------
+1st approach:
+-------------
+  $ Connect using username and password;
+    > HOST-NODE-IP ansible_user=ansible ansible_password=password;
+-------------
+2nd approach:
+-------------
+  $ sudo su ansible
+  $ ssh-keygen
+  $ ssh-copy-id ansible@172.31.8.123
+$ ansible all -m ping
+
+$ ansible 'all/ groupname/ hostname/ ip' -m 'module-name' -a arguments;
+$ ansible all -m shell -a 'service sshd status';
+$ ansible all -m shell -a 'du -h';
+$ ansible all -m shell -a 'yum git install'
+-----------------------------------------------------------
+id: 366840108622;
+3r4rss@gmail.com
+R@g9....
+-----------------------------------------------------------
+PollSCM; Parameter; Users Creation & Auth n Authorize; master & slave;
+**/*.war
+*/${BranchName}
+-----------------------------------------------------------
+echo "Hello"
+touch raghu.txt
+echo "Test to Jenkins" >> raghu.txt
+echo "Completed"
+-----------------------------------------------------------
+https://raw.githubusercontent.com/ansible/ansible/devel/examples/ansible.cfg
+https://raw.githubusercontent.com/ansible/ansible/devel/examples/hosts
+-----------------------------------------------------------
+auth:
+https://www.youtube.com/watch?v=9JPnN1Z_iSY
+
+
+
+Docker:
+1 - https://www.youtube.com/watch?v=5wvcFI-pOAo	1.16 Hr
+2 - https://www.youtube.com/watch?v=wxCp7M4ggpc 	1.26 Hr
