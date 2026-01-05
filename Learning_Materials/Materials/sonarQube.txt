@@ -1,0 +1,58 @@
+connect with EC2 instance t2-Medium
+$ sudo su
+$ yum install wget -y
+$ cd /opt
+$ sudo yum install java-21-amazon-corretto.x86_64 -y
+$ java -version
+$ yum install wget unzip -y
+$ wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-25.12.0.117093.zip
+$ unzip sonarqube-7.8.zip
+
+Note: SonarQube server will not run with root user
+
+Create new user
+$ useradd sonar => sudo passwd sonar: enter password; => su sonar (changing user);
+
+configure sudo user without pwd
+$ visudo => 
+sonal ALL=(ALL) NOPASSWD: ALL
+
+Change ownership for sonar folder
+$ chown -R sonar:sonar /opt/sonarqube-25.12.0.117093 (changing ownership);
+$ chmod -R 775 /opt/sonarqube-25.12.0.117093 (file permission);
+$ su - sonar (switching to sonar user)
+
+$ chmod -R 775 /opt/sonarqube-25.12.0.117093
+
+$ cd /bin/linux-x86-64
+$ su sonar.sh start
+
+ChangePort Number:	>> /conf/sonar.properties
+
+Configure Sonar Properties under <properties/> tag in pom.xml:
+ <properties>
+  <sonar.host.url>http://http://43.205.203.164:9000/</sonar.host.url>
+  <sonar.login>admin</sonar.login>
+  <sonar.password>admin</sonar.password>
+ </properties>
+ <properties>
+  <sonar.host.url>sonar-server-url</sonar.host.url>
+  <sonar.login>admin</sonar.login>
+ </properties>
+$mvn sonar:sonar
+optional(mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar)
+
+Generate Token:
+goto sonar > login > profile > myAccount > Security > Generate Token (Copy Token);
+
+
+Bugs:		Problems available in our project;
+Vulnerabilities:	Security Issues (Hackers can hack our applictions);
+Code Smells:	Any production issues;
+Coverage:	Unit Testing (How many lines as tested as Unit Testing) will show in percentage. Industry standard is 80%;
+Duplications:	Code is not repeated;
+
+Cognitive Complexity: in software development is a measure of how hard it is to understand a given piece of code. eg: function, a class etc.,
+Cyclomatic Complexity: is a quantitative measure of the number of linearly independent paths through a programs source code. 
+
+
