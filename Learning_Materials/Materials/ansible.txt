@@ -1,0 +1,50 @@
+# Connect to all the systems and create ansible user (Optional & Recommended)
+
+$ sudo useradd ansible
+$ sudo passwd ansible	>> pwd & confirm pwd
+
+$ sudo visudo
+	ansible ALL=(ALL) NOPASSWD: ALL
+$ sudo vi /etc/ssh/sshd_config
+	Comment PasswordAuthentication no
+	un-Comment passwordAuthentication yes
+	Restart the server
+$ sudo service sshd restart
+Note: Do the above steps in all machines (server & hosts);
+
+# Ansible Installation:
+---------------------------
+# Switch to ansible user
+$ sudo su ansible
+$ sudo yum install python3 -y
+$ python3 --version
+$ sudo alternatives --set python /usr/bin/python3 (Optional)
+$ python --version (Optional)
+$ sudo yum -y install python3-pip
+$ pip3 install ansible --user
+$ ansible --version
+$ sudo mkdir /etc/ansible/
+$ sudo vi /etc/ansible/ansible.cfg (Take examples from the below url)
+$ sudo vi /etc/ansible/hosts (Take examples from the below url)
+
+url: https://github.com/ansible/ansible/blob/stable-2.9/examples/ansible.cfg
+
+#Generate SSH Key:
+------------------------
+$ sudo su ansible
+$ ssh-keygen
+$ ssh-copy-id ansible@172.31.46.123 (Host IP (For all hosts));
+
+# pinging hosts:
+ansible all -m ping
+
+
+#example in hosts file:
+---------------------------
+172.31.1.38 ansible_user=ansible ansible_password=rootroot
+172.31.8.14
+
+#Examples:
+---------------
+ansible all -m ping
+ansible dbservers -m shell -a 'sudo yum install git -y'
