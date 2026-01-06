@@ -46,5 +46,135 @@ ansible all -m ping
 
 #Examples:
 ---------------
-ansible all -m ping
-ansible dbservers -m shell -a 'sudo yum install git -y'
+
+$ ansible webservers -m shell -a 'date'
+$ ansible all -m shell -a uptime
+$ ansible -doc -l (available modules in ansible);
+$ ansible-doc <modulename>
+$ ansible-doc shell
+$ ansible-doc -l | grep 'copy'
+$ ansible-doc yum
+
+ping module:
+$ ansible all -m ping
+$ ansible all -m ping -o (output in single line);
+$ ansible all -m shell -a 'date'
+$ ansible all -m shell -a 'cat /etc/*release'
+$ ansible all -m shell -a 'mount' (kind of mount on all machines);
+$ ansible all -b -m shell -a 'service sshd status' (service status);
+$ ansible dbservers -a 'df-h' (disk space);
+$ ansible webservers -a 'free -m' (disk space);
+$ ansible webservers -a 'date'
+
+yum module:
+$ ansible all -b -m yum -a 'name=vim' (install vim editor)
+$ ansible all -m shell -a 'git --version'
+$ ansible all -m shell -b -a 'yum install git -y'
+$ ansible webservers -m shell -b -a 'yum install git -y'
+$ ansible 172.132.1.8 -m shell -b -a 'yum install git -y'
+present: install;
+latest: update to latest;
+absent: un-install;
+$ ansible all -m apt -a 'name=git state=latest' (Default is present)
+
+
+#PlayBooks:
+---------------
+$ ansible-playbook ping.yml -v | -vv | -vvv (verbose for detailing);
+$ ansible-playbook --help
+$ ansible-playbook ping.yml --syntax-check
+$ ansible-playbook ping.yml --check (dry run)
+$ ansible-playbook ping.yml --list-hosts (list of effecting hosts);
+$ ansible-playbook ping.yml --step (step by step run);
+
+#Samples for playbooks:
+-----------------------------
+# to ping all host nodes
+---
+- hosts: all
+  tasks:
+  - name: ping all host nodes
+    ping:
+    remote_user: ansible
+---
+#to create a file
+---
+- hosts: all
+  tasks: 
+  - name: create file in host nodes
+    file:
+     path: /home/ansible/hello.txt\
+     state: touch
+---
+# to copy content
+---
+- hosts: all
+  tasks: 
+  - name: copy content to a file
+    copy: content='Hello World \n' dest='/home/ansible/hello.txt'
+--- 
+# to install httpd package
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: install httpd package
+    yum:
+     name: httpd
+     state: latest
+---
+# to install and start the httpd
+---
+- hosts: all
+  become: true
+  tasks: 
+  - name: install httpd package
+    yum:
+     name: httpd
+     state: latest
+  - name: start httpd server\
+    service: 
+     name: httpd
+     state: started
+---
+# to install httpd, copy index.html & start httpd server
+# note: need to create index.html file;
+---
+- hosts: all
+  become: true
+  tasks: 
+  - name: install httpd package
+    yum:
+     name: httpd
+     state: latest
+  - name: copy index.html file
+    copy: 
+     src: index.html
+     dest: /var/www/html/index.html
+  - name: start httpd service
+    service: 
+     name: httpd
+     state: started
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
