@@ -234,6 +234,50 @@ sudo yum remove -y httpd git python3 python3-pip nodejs npm
 
 ansible all -m yum -a 'name=httpd, git, python3, python3-pip, nodejs, npm state=present' -b
 
+===================================================================================
+$ ls | ls -al (hidden) >> list;
+$ pwd >> current working directory;
+$ cd >> changing directory;
+$ mkdir nameFld >> new directory;
+$ rmdir nameFld >> delete directory
+
+$ touch >> creates file;
+$ cat > nameFle >> creates file;
+$ echo >> prints on terminal only;
+$ cp >> copies files;
+$ mv >> moves files/folders;
+
+$ rm >> deletes file;
+$ nano >> creates (like vi);
+$ shred filename >>  hide/encode text;
+$ less filename >> to see the content;
+$ grep 'wrd' 'flnm' >> search te text;
+
+$ find >> finds the file in directory;
+$ chmod >> permissions;
+$ gzip | gunzip >> creates zip file;
+$ date >> prints date;
+$ whoami >> current user;
+
+$ history >> todays used commands;
+$ df >> diskspace usage;
+$ du >> diskspace by directory/file;
+$ uname >> info of OS;
+$ clear >> clear the terminal;
+
+$ man >> user manual;
+$ wget >> downloads file from internet;
+$ shutdown now/exact time >> showdowns;
+
+###################################################################################################
+
+create group: 	>> 	sudo groupadd test >> asks password;
+see group: 	>>	cat /etc/group/;
+see users	>>	ls /home/
+create user	>>	sudo useradd raghunadh;
+add password	>>	sudo passwd raghunadh
+see user info 	>>	cat /etc/passwd | grep raghu;
+change to root	>>	sudo -i
 
 
 
