@@ -156,25 +156,84 @@ $ ansible-playbook ping.yml --step (step by step run);
      name: httpd
      state: started
 ---
+---------------------------------------------------------------
+---
+- name: Setup Amazon Linux with common tools
+  hosts: all
+  become: yes
 
+  tasks:
+    - name: Install required packages
+      yum:
+        name:
+          - httpd
+          - git
+          - python3
+          - python3-pip
+          - nodejs
+          - npm
+        state: present
 
+    - name: Start and enable httpd
+      service:
+        name: httpd
+        state: started
+        enabled: yes
 
+    - name: Check httpd version
+      command: httpd -v
+      register: httpd_version
+      ignore_errors: yes
 
+    - name: Check git version
+      command: git --version
+      register: git_version
 
+    - name: Check python version
+      command: python3 --version
+      register: python_version
 
+    - name: Check pip version
+      command: pip3 --version
+      register: pip_version
 
+    - name: Check node version
+      command: node --version
+      register: node_version
 
+    - name: Check npm version
+      command: npm --version
+      register: npm_version
 
+    - name: Display versions
+      debug:
+        msg:
+          - "{{ httpd_version.stdout | default('httpd not installed') }}"
+          - "{{ git_version.stdout }}"
+          - "{{ python_version.stdout }}"
+          - "{{ pip_version.stdout }}"
+          - "{{ node_version.stdout }}"
+          - "{{ npm_version.stdout }}"
+---
+$ ansible-playbook amazon_linux_setup.yml
+-----------------------------------------------------------------
+---
+- name: Remove installed applications
+  hosts: all
+  become: yes
 
-
-
-
-
-
-
-
-
-
-
-
+  tasks:
+    - name: Remove packages
+      yum:
+        name:
+          - httpd
+          - git
+          - python3
+          - python3-pip
+          - nodejs
+          - npm
+        state: absent
+---
+$ ansible-playbook remove_apps.yml
+-----------------------------------------------------------------
 
