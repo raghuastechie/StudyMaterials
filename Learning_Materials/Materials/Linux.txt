@@ -138,5 +138,102 @@ alias ll='ls -al'	Create a command alias
 date	Show current date and time
 cal	Display calendar
 man [command]	Show manual page
+=====================================================================================
+🛠️ System / CLI tools
+
+vim
+
+nano
+
+htop
+
+tree
+
+wget
+
+curl
+
+zip
+
+unzip
+
+🌐 Web / Server
+
+httpd (Apache – RHEL)
+
+apache2 (Ubuntu)
+
+nginx
+
+vsftpd
+
+openssh-server
+
+🐙 Dev / Version Control
+
+git
+
+python3
+
+python3-pip
+
+nodejs
+
+npm
+
+🗄️ Databases (for practice)
+
+mysql-server / mariadb-server
+
+postgresql
+
+🔍 Monitoring / Debug
+
+net-tools
+
+tcpdump
+
+nmap
+
+lsof
+
+
+-----------------------------------------------
+Practice for few installations:
+--------------------------------
+
+
+sudo yum install -y httpd
+sudo yum remove -y httpd
+httpd -v
+sudo systemctl start httpd
+sudo systemctl enable httpd
+
+sudo yum install -y git
+sudo yum remove -y git
+git --version
+
+sudo yum install -y python3
+sudo yum remove -y python3
+python3 --version
+
+sudo yum install -y python3-pip
+sudo yum remove -y python3-pip
+pip3 --version
+
+sudo yum install -y nodejs
+sudo yum remove -y nodejs
+node --version
+
+sudo yum install -y npm
+sudo yum remove -y npm
+npm --version
+
+sudo yum install -y httpd git python3 python3-pip nodejs npm
+sudo yum remove -y httpd git python3 python3-pip nodejs npm
+
+ansible all -m yum -a 'name=httpd, git, python3, python3-pip, nodejs, npm state=present' -b
+
+
 
 
