@@ -22,4 +22,121 @@ grep
 user maintanance
 installing
 
+🔹 File and Directory Commands
+Command		Description
+ls		List directory contents
+pwd	Print current working directory
+cd [dir]	Change directory
+mkdir [dir]	Create a new directory
+rmdir [dir]	Remove an empty directory
+rm [file]	Delete a file
+rm -r [dir]	Delete a directory and its contents
+cp [src] [dest]	Copy files or directories
+mv [src] [dest]	Move or rename files
+touch [file]	Create an empty file
+cat [file]	View file content
+more [file] / less [file]	View file content one screen at a time
+head [file]	View first 10 lines of a file
+tail [file]	View last 10 lines of a file
+
+🔹 File Permissions
+Command	Description
+chmod [permissions] [file]	Change file permissions
+chown [owner] [file]	Change file owner
+chgrp [group] [file]	Change file group
+ls -l	List with permissions
+
+🔹 Process Management
+Command	Description
+ps	Show running processes
+top	Real-time process monitoring
+htop	Interactive process viewer (needs installation)
+kill [PID]	Terminate a process by PID
+killall [name]	Kill all processes by name
+nice / renice	Set process priority
+&	Run a command in background
+jobs	Show background jobs
+fg / bg	Resume jobs in foreground/background
+
+🔹 Disk and Filesystem
+Command	Description
+df -h	Show disk usage
+du -sh [dir/file]	Show size of a file or directory
+mount / umount	Mount or unmount drives
+fsck	Filesystem check
+mkfs	Create filesystem
+blkid	Display block device info
+
+🔹 User Management
+Command	Description
+adduser [user]	Add new user
+passwd [user]	Change user password
+deluser [user]	Delete a user
+whoami	Show current user
+id	Show user/group info
+su [user]	Switch user
+sudo [command]	Run command as superuser
+
+🔹 Networking
+Command	Description
+ip a or ifconfig	Show IP address (ip is newer)
+ping [host]	Ping a host
+netstat -tuln	Show listening ports
+ss -tuln	Faster alternative to netstat
+curl [url]	Fetch a URL
+wget [url]	Download file from a URL
+scp	Secure copy over SSH
+ssh [user@host]	SSH into a remote server
+traceroute [host]	Show path to a host
+
+🔹 Search & Text Processing
+Command	Description
+grep '[pattern]' [file]	Search in a file
+find [dir] -name [name]	Find files by name
+locate [name]	Quickly locate a file (uses index)
+awk	Pattern scanning and processing
+sed	Stream editor (e.g., find and replace)
+cut, sort, uniq	Text filtering and processing
+
+🔹 Package Management
+(Varies by distribution)
+
+System	Commands
+Debian/Ubuntu	apt, dpkg
+RedHat/CentOS	yum, dnf, rpm
+Arch	pacman
+Example:
+
+sudo apt update && sudo apt upgrade
+
+sudo dnf install [package]
+
+sudo pacman -S [package]
+
+🔹 System Information
+Command	Description
+uname -a	Show system info
+uptime	Show system uptime
+free -h	Show memory usage
+top / htop	Monitor system resources
+vmstat	Report on processes/memory
+lscpu	Show CPU info
+lsblk	Show block devices
+dmesg	System boot and hardware messages
+
+🔹 Compression and Archiving
+Command	Description
+tar -czf file.tar.gz [dir]	Create compressed archive
+tar -xzf file.tar.gz	Extract archive
+zip / unzip	Compress or extract zip files
+gzip / gunzip	Compress or decompress .gz files
+
+🔹 Miscellaneous
+Command	Description
+history	Show command history
+alias ll='ls -al'	Create a command alias
+date	Show current date and time
+cal	Display calendar
+man [command]	Show manual page
+
 
