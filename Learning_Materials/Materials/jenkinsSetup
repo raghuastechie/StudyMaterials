@@ -42,7 +42,36 @@ sudo yum update -y
 	<role rolename="admin-gui" />
 	<role rolename="manager-script" />
 	<user username="admin" password="admin" roles="manager-gui,manager-script,admin-gui" />
-================================================================================
+
+* Deploy to Container:
+	WAR/EAR files: 	>>	**/*.war
+	Context path: 	>>	raghusWeb (project name in URL);
+	Container:	>>	Tomcat 9.x Remote / GlassFish / JBoss As 7x
+	Tomcat Credentials	>>	add Credentials;
+	Tomcat URL	>>	http:// ip address/9090
+* Build Pipeline:
+
+*forgot password jenkins:
+goto /var/lib/jenkins/config.xml >> make it 'useSecurity' as false;
+
+*port change in jenkins:
+/etc/sysconfig/jenkins	>> JENKINS_PORT=8081;
+
+*parameterized Jov:
+Choose 'Choice Parameter' and */${BranchName}
+
+users Default path:
+/var/lib/jenkins/users
+-----------------------
+1) 	Shell Script Execution;
+2)	Attaching Git, adding Credentials, ading JDK & Maven;
+3)	Build & Deploying with Maven & Tomcat (Deploy Container Plugin);
+4)	Build Pipeline (Build Pipeline Plugin);
+5)	Parameterized Build;
+6)	Security & Permissions;
+
+
+=================================================================================
 id: 366840108622;
 3r4rss@gmail.com
 R@g9....
