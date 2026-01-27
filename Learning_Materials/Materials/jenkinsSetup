@@ -1,6 +1,4 @@
 
-
-
 Stpes to follow: >> install 	1. Git | 2. JDK | 3. Jenkins | 4. Tomcat Apache
 
 Create Ec2 Instance with Amazon Linux Server;
@@ -44,49 +42,7 @@ sudo yum update -y
 	<role rolename="admin-gui" />
 	<role rolename="manager-script" />
 	<user username="admin" password="admin" roles="manager-gui,manager-script,admin-gui" />
-
-==============================================================================================================
-1:  Setup Ansible:
-	Created 2 EC2 (Host & serverNode)
- * For both Systems:
-	$ sudo useradd ansible;
-	$ sudo passwd ansible (pw: ansible);
-	$ sudo visudo	>>	ansible ALL=(ALL) NOPASSWD: ALL (near @ root ALL=(ALL)   ALL);
-	$ sudo vi /etc/ssh/sshd_config;
-	 > comment PasswordAuthentication no;
-	 > un-commnet PasswordAuthentication yes;
-	 > Restart the server;
-	$ sudo service sshd restart;
- * install python
-	$ sudo yum install python3 -y; > check python3 --version;
-	$ sudo alternatives --set python /usr/bin/python3	(update python3 alternatives);
-	$ sudo yum -y install python3-pip 	(Installing python package manager - PIP);
-	$ pip3 install ansible --user 	(installing Ansible using Python PIP);
-	$ ansible --version;
-	$ sudo mkdir /etc/ansible;
-	$ sudo vi /etc/ansible/ansible.cfg
-	 > copy from this url and past it in ansible.cfg. (https://github.com/ansible/ansible/blob/stable-2.9/examples/ansible.cfg)
-	$ sudo vi /etc/ansible/hosts; ();
-------------------------------- Ansible Setup Completed -------------------------------
-$ sudo vi /etc/ansible/hosts 	(update host inventory in ansible host file for test connection);
--------------
-1st approach:
--------------
-  $ Connect using username and password;
-    > HOST-NODE-IP ansible_user=ansible ansible_password=password;
--------------
-2nd approach:
--------------
-  $ sudo su ansible
-  $ ssh-keygen
-  $ ssh-copy-id ansible@172.31.8.123
-$ ansible all -m ping
-
-$ ansible 'all/ groupname/ hostname/ ip' -m 'module-name' -a arguments;
-$ ansible all -m shell -a 'service sshd status';
-$ ansible all -m shell -a 'du -h';
-$ ansible all -m shell -a 'yum git install'
------------------------------------------------------------
+================================================================================
 id: 366840108622;
 3r4rss@gmail.com
 R@g9....
@@ -96,8 +52,3 @@ echo "Hello"
 touch raghu.txt
 echo "Test to Jenkins" >> raghu.txt
 echo "Completed"
------------------------------------------------------------
-https://raw.githubusercontent.com/ansible/ansible/devel/examples/ansible.cfg
-https://raw.githubusercontent.com/ansible/ansible/devel/examples/hosts
-
-
