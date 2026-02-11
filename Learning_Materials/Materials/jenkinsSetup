@@ -83,6 +83,44 @@ Username as 'ec2-username' >> select private as Enter directly and add private k
 Note: Open gitbash from your .pem file location and execute below command to get private key >> $ cat <filename>.pem
 select host key strategy as 'Manually Trusted Key Verification Strategy'
 Click on apply and save (We can see configure slave);
+
+
+Pipelines:
+------------
+pipeline {
+    agent any
+    stages {
+        stage('httpdInstalling') {
+            steps {
+                sh '''
+                    echo 'httpdInstalling stage runnning'
+                    if grep -qi 'ubuntu' /etc/os-release ; then
+                        sudo apt install -y apache2
+                        sudo systemctl enable apache2
+                        sudo systemctl start apache2
+                        sudo systemctl status apache2 || true
+                    elif grep -qiE 'centos|rhel|amazon' /etc/os-release ; then
+                        sudo yum install httpd -y
+                        sudo systemctl enable httpd
+                        sudo systemctl start httpd
+                        sudo systemctl status httpd || true
+                    fi
+                '''
+            }
+        }        
+    }
+    post {
+        always {
+            sh 'echo "pipeline completed"'
+        }
+        success {
+            sh 'echo "pipeline successd"'
+        }
+        failure {
+            sh 'echo "pipeline failured"'
+        }
+    }
+}
 =================================================================================
 id: 366840108622;
 3r4rss@gmail.com
