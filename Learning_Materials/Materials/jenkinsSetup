@@ -62,7 +62,8 @@ Choose 'Choice Parameter' and */${BranchName}
 
 users Default path:
 /var/lib/jenkins/users
------------------------
+/var/lib/jenkins/workspace
+--------------------------------
 1) 	Shell Script Execution;
 2)	Attaching Git, adding Credentials, ading JDK & Maven;
 3)	Build & Deploying with Maven & Tomcat (Deploy Container Plugin);
@@ -70,7 +71,18 @@ users Default path:
 5)	Parameterized Build;
 6)	Security & Permissions;
 
-
+*Configure Slave Node in Jenkins Master Node:
+------------------------------------------------------
+Goto Jenkins Dashboard >> Manage Jenkins >> Nodes
+Create New Node >> Enter Name >> select Permanent Agent
+Enter remote root directory (create one folder in childnode and give the path. ex: /home/ec2-user/slavenode)
+Enter  label as Slave-1 >> select launch method as 'Launch Agent Via SSH'
+Host as 'Slave VM Public DNS URL'
+Add Credentials (Select kind as : SSH Username with private key)
+Username as 'ec2-username' >> select private as Enter directly and add private key
+Note: Open gitbash from your .pem file location and execute below command to get private key >> $ cat <filename>.pem
+select host key strategy as 'Manually Trusted Key Verification Strategy'
+Click on apply and save (We can see configure slave);
 =================================================================================
 id: 366840108622;
 3r4rss@gmail.com
