@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+    stages {
+        stage('httpdInstalling') {
+            steps {
+                sh '''
+                    echo 'httpdInstalling stage runnning'
+                    if grep -qi 'ubuntu' /etc/os-release ; then
+                        sudo apt install -y apache2
+                        sudo systemctl enable apache2
+                        sudo systemctl start apache2
+                        sudo systemctl status apache2 || true
+                    elif grep -qiE 'centos|rhel|amazon' /etc/os-release ; then
+                        sudo yum install httpd -y
+                        sudo systemctl enable httpd
+                        sudo systemctl start httpd
+                        sudo systemctl status httpd || true
+                    fi
+                '''
+            }
+        }        
+    }
+    post {
+        always {
+            sh 'echo "pipeline completed"'
+        }
+        success {
+            sh 'echo "pipeline successd"'
+        }
+        failure {
+            sh 'echo "pipeline failured"'
+        }
+    }
+}
